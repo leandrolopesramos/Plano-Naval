@@ -1,0 +1,20 @@
+CREATE DATABASE PlanoNaval;
+USE PlanoNaval;
+
+CREATE TABLE IF NOT EXISTS usuario (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+nome VARCHAR (60) NOT NULL, idade INT, login VARCHAR (60) NOT NULL, senha VARCHAR (60) NOT NULL,
+sexo VARCHAR (1), escolaridade_usuario VARCHAR (60) NOT NULL, 
+nivel_questão INT, pontuacao_usuario INT);
+
+CREATE TABLE IF NOT EXISTS questao (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+nivel INT NOT NULL, subnivel INT NOT NULL, 
+enunciado VARCHAR (160) NOT NULL, alternativa_certa VARCHAR (100) NOT NULL, 
+alternativa1 VARCHAR (100) NOT NULL, alternativa2 VARCHAR (100) NOT NULL, 
+alternativa3 VARCHAR (100) NOT NULL, alternativa4 VARCHAR (100) NOT NULL);
+
+CREATE TABLE IF NOT EXISTS ranking (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, posicao INT,
+id_usuario INT NOT NULL, UNIQUE INDEX id_usuario_fk (id ASC));
+
+ALTER TABLE ranking ADD CONSTRAINT id_usuario_fk FOREIGN KEY (id) REFERENCES usuario (id);
+
+INSERT INTO usuario VALUES ("admin", "admin", "M", "Superior", 0, 0);
